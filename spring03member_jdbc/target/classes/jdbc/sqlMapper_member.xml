@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test.com.jdbc">
+	<select id="m_selectList" resultType="test.com.jdbc.MemberVO">
+		SELECT * FROM MEMBER ORDER
+		BY NUM DESC
+	</select>
+	<select id="m_searchList_name"
+		resultType="test.com.jdbc.MemberVO">
+		SELECT * FROM MEMBER WHERE NAME LIKE #{searchWord} ORDER BY
+		NUM DESC
+	</select>
+	<select id="m_searchList_tel"
+		resultType="test.com.jdbc.MemberVO">
+		SELECT * FROM MEMBER WHERE TEL LIKE #{searchWord} ORDER BY
+		NUM DESC
+	</select>
+	<select id="m_selectOne" resultType="test.com.jdbc.MemberVO">
+		SELECT * FROM MEMBER WHERE
+		ID=#{id}
+	</select>
+	<select id="m_idCheck" resultType="test.com.jdbc.MemberVO">
+		SELECT distinct id FROM MEMBER
+		WHERE ID=#{id}
+	</select>
+	<select id="m_login" resultType="test.com.jdbc.MemberVO">
+		SELECT DISTINCT ID FROM MEMBER
+		WHERE ID=#{id} and PW=#{pw}
+	</select>
+	<insert id="m_insert">
+		INSERT INTO MEMBER(NUM,ID,PW,NAME,TEL)
+		VALUES(SEQ_MEMBER.nextval,#{id},#{pw},#{name},#{tel})
+	</insert>
+	<update id="m_update">
+		UPDATE MEMBER SET PW=#{pw},
+		NAME=#{name},TEL=#{tel}
+		WHERE NUM = #{num}
+	</update>
+
+	<delete id="m_delete">
+		DELETE FROM MEMBER WHERE ID=#{id}
+	</delete>
+
+</mapper>
